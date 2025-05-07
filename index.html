@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Refined Dashboard</title>
+  <title>Dashboard with Quotes</title>
   <style>
     * { box-sizing: border-box; }
     html, body {
@@ -42,6 +42,15 @@
       height: 100%;
       border: none;
     }
+    .quote-panel {
+      background-color: #ffffff;
+      color: #333;
+      font-size: 1.25rem;
+      text-align: center;
+      padding: 1rem;
+      border-top: 1px solid #ccc;
+      flex: 0 0 auto;
+    }
   </style>
 </head>
 <body>
@@ -66,6 +75,10 @@
     </iframe>
   </div>
 
+  <div class="quote-panel" id="quote">
+    Loading quote...
+  </div>
+
   <script>
     function updateClock() {
       const now = new Date();
@@ -85,8 +98,27 @@
       document.getElementById('time').innerText = timeString;
       document.getElementById('date').innerText = dateString;
     }
+
+    const quotes = [
+      "The best time to plant a tree was 20 years ago. The second best time is now.",
+      "Do something today that your future self will thank you for.",
+      "Don’t watch the clock; do what it does. Keep going.",
+      "The secret of getting ahead is getting started.",
+      "Success is not final, failure is not fatal: It is the courage to continue that counts.",
+      "Every day is a second chance.",
+      "Your time is limited, so don’t waste it living someone else’s life."
+    ];
+
+    function rotateQuote() {
+      const quoteEl = document.getElementById('quote');
+      const quote = quotes[Math.floor(Math.random() * quotes.length)];
+      quoteEl.innerText = quote;
+    }
+
     setInterval(updateClock, 1000);
+    setInterval(rotateQuote, 15000); // change quote every 15 seconds
     updateClock();
+    rotateQuote();
   </script>
 </body>
 </html>
