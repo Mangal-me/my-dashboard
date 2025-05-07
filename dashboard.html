@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Refined Dashboard</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+    header {
+      background-color: #222;
+      color: white;
+      padding: 1.5rem;
+      text-align: center;
+      flex: 0 0 auto;
+    }
+    #time {
+      font-size: 3rem;
+      font-weight: bold;
+      line-height: 1.2;
+    }
+    #date {
+      font-size: 1.5rem;
+    }
+    .panel {
+      flex: 1;
+      overflow: hidden;
+      border-top: 1px solid #ccc;
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div id="time">--:--:--</div>
+    <div id="date">Loading date...</div>
+  </header>
+
+  <div class="panel" style="flex: 2;">
+    <!-- Full Calendar View -->
+    <iframe 
+      src="https://calendar.google.com/calendar/embed?src=mangal007%40gmail.com&ctz=Asia%2FBangkok" 
+      title="Google Calendar">
+    </iframe>
+  </div>
+
+  <div class="panel" style="flex: 1;">
+    <!-- Agenda View for Upcoming Events -->
+    <iframe 
+      src="https://calendar.google.com/calendar/embed?src=mangal007%40gmail.com&ctz=Asia%2FBangkok&mode=AGENDA" 
+      title="Upcoming Events">
+    </iframe>
+  </div>
+
+  <script>
+    function updateClock() {
+      const now = new Date();
+      const timeString = now.toLocaleTimeString('en-GB', {
+        timeZone: 'Asia/Bangkok',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+      });
+      const dateString = now.toLocaleDateString('en-GB', {
+        timeZone: 'Asia/Bangkok',
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+      document.getElementById('time').innerText = timeString;
+      document.getElementById('date').innerText = dateString;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+  </script>
+</body>
+</html>
